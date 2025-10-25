@@ -274,3 +274,38 @@ h1 {
 .schedule strong {
   color: #3b82f6;
 }
+
+.add-activity {
+  margin-top: 2rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 70%;
+  margin-inline: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.add-activity input {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.add-activity button {
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-activity button:hover {
+  background-color: #2563eb;
+}
+
+.schedule button {
+  margin-left: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

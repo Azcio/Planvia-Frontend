@@ -200,6 +200,73 @@ createApp({
       }
     })
 
+    // For adding/editing activities
+    const newActivity = ref('')
+    const newTime = ref('')
+    const editingIndex = ref(null)
+
+    // Add or update an activity
+    const saveActivity = async () => {
+      if (!newActivity.value || !newTime.value) {
+        alert('Please enter both time and activity')
+        return
+      }
+
+      if (editingIndex.value !== null) {
+        // Update existing activity
+        schedule.value[editingIndex.value] = {
+          time: newTime.value,
+          activity: newActivity.value,
+        }
+        editingIndex.value = null
+      } else {
+        // Add new activity
+        schedule.value.push({
+          time: newTime.value,
+          activity: newActivity.value,
+        })
+      }
+
+      // Clear inputs
+      newActivity.value = ''
+      newTime.value = ''
+
+      // Save to backend
+      await saveSchedule()
+    }
+
+    // Edit existing activity
+    const editActivity = (index) => {
+      const item = schedule.value[index]
+      newActivity.value = item.activity
+      newTime.value = item.time
+      editingIndex.value = index
+    }
+
+    // Delete an activity
+    const deleteActivity = async (index) => {
+      schedule.value.splice(index, 1)
+      await saveSchedule()
+    }
+
+    // Save current day's schedule to backend
+    const saveSchedule = async () => {
+      const token = localStorage.getItem('token')
+      const res = await fetch('http://localhost:5000/api/schedule', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        body: JSON.stringify({
+          date: formattedDate.value,
+          activities: schedule.value,
+        }),
+      })
+      const data = await res.json()
+      console.log('Schedule saved:', data)
+    }
+
     return {
       username,
       showPassword,
@@ -216,6 +283,12 @@ createApp({
       previousDay,
       goToTimetable,
       fetchSchedule,
+      newActivity,
+      newTime,
+      editingIndex,
+      saveActivity,
+      editActivity,
+      deleteActivity,
     }
   },
 }).mount('#app')

@@ -103,8 +103,17 @@
           <ul v-else>
             <li v-for="item in schedule" :key="item.time">
               <strong>{{ item.time }}</strong> — {{ item.activity }}
+              <button @click="editActivity(index)">✏️</button>
+              <button @click="deleteActivity(index)">🗑️</button>
             </li>
           </ul>
+        </div>
+
+        <div class="add-activity">
+          <h3>{{ editingIndex !== null ? 'Edit Activity' : 'Add New Activity' }}</h3>
+          <input v-model="newTime" type="time" />
+          <input v-model="newActivity" placeholder="Activity name" />
+          <button @click="saveActivity">{{ editingIndex !== null ? 'Update' : 'Add' }}</button>
         </div>
 
         <button @click="page='home'">Back to Home</button>
