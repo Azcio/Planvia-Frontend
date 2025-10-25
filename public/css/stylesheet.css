@@ -1,0 +1,276 @@
+/* -------------------------- GLOBAL -------------------------- */
+body {
+  background: linear-gradient(to right, #0000ff, #800080);
+  height: 100vh; /* full viewport height */
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* ------------------------- START PAGE ----------------------- */
+.start-page {
+  display: flex;
+  flex-direction: column; /* stack items vertically */
+  align-items: center; /* center horizontally */
+  justify-content: flex-start; /* start from top */
+  min-height: 100vh;
+  width: 100%;
+  gap: 2rem;
+  text-align: center;
+  padding-top: 2%;
+}
+
+/* Logo + Title container */
+.start-Header {
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  padding: 2%;
+  width: 20%;
+  border-radius: 30%;
+  float: left;
+}
+
+/* Main Title */
+h1 {
+  font-size: 4rem;
+}
+
+/* ------------------------- LOGIN BOX ------------------------ */
+#login-box {
+  color: black;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  height: 30%;
+  width: 40%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+#login-box h1,
+.register-box h1 {
+  padding: 2%;
+  margin: 0;
+  font-size: 3em;
+}
+
+#login-box input,
+.register-box input {
+  width: 80%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  border-radius: 1em;
+  font-size: 2rem;
+  outline: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.password-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.password-wrapper i {
+  position: absolute;
+  right: 3.5rem;
+  top: 40%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #333;
+}
+
+.login-message {
+  color: red; /* red for errors */
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+#login-box button,
+.register-box button {
+  width: 50%;
+  padding: 0.75rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 1em;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#login-box button:hover,
+.register-box button:hover {
+  background-color: #2563eb;
+}
+
+/* Register link */
+.register-link {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+.register-link button,
+.register-link a {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+.register-link button:hover,
+.register-link a:hover {
+  color: #2563eb;
+}
+
+/* ------------------------- REGISTER PAGE ------------------- */
+#register-box {
+  color: black;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  height: 30%;
+  width: 40%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+#register-box h1 {
+  padding: 2%;
+  margin: 0;
+  font-size: 3em;
+}
+
+#register-box input {
+  width: 80%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  border-radius: 1em;
+  font-size: 2rem;
+  outline: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#register-box button {
+  width: 50%;
+  padding: 0.75rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 1em;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#register-box button:hover {
+  background-color: #2563eb;
+}
+
+.password-rules {
+  text-align: left;
+  font-size: 0.9rem;
+  margin: 0.5rem auto 1rem;
+  color: #555;
+  width: 70%;
+  list-style: none;
+  padding: 0;
+}
+
+.password-rules li {
+  margin: 0.25rem 0;
+  transition: color 0.2s;
+}
+
+.password-rules li.valid {
+  color: green;
+  font-weight: bold;
+}
+
+/* ------------------------- HOME PAGE ----------------------- */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding-top: 5%;
+  gap: 2rem;
+  color: white;
+}
+
+.home-page h2 {
+  font-size: 2rem;
+}
+
+.home-page button {
+  padding: 0.5rem 1rem;
+  border-radius: 1em;
+  border: none;
+  background-color: #3b82f6;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.home-page button:hover {
+  background-color: #2563eb;
+}
+
+/* ------------------------- TimeTable Page ----------------------- */
+.timetable-page {
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+.timetable-page h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.schedule {
+  background: white;
+  color: black;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 70%;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.schedule ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.schedule li {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.schedule li:last-child {
+  border-bottom: none;
+}
+
+.schedule strong {
+  color: #3b82f6;
+}
