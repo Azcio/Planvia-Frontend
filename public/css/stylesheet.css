@@ -206,28 +206,43 @@ h1 {
 
 /* ------------------------- HOME PAGE ----------------------- */
 .home-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  justify-content: center; /* center the whole grid horizontally */
   padding-top: 5%;
-  gap: 2rem;
   color: white;
+  max-height: 100vh;
+  max-width: 50vw;
+  text-align: center;
+  margin: 0 auto; /* center within the page */
 }
 
 .home-page h2 {
+  grid-column: 1 / -1; /*make it span both columns */
+  text-align: center;
   font-size: 2rem;
+  margin-bottom: 2em;
 }
 
-.home-page button {
-  padding: 0.5rem 1rem;
-  border-radius: 1em;
-  border: none;
+.Page-Button {
   background-color: #3b82f6;
-  color: white;
+  border-radius: 12%;
   cursor: pointer;
-  transition: background-color 0.2s;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin: 1%;
+}
+
+.Page-Button img {
+  width: 40%;
+}
+
+.Page-Button h3 {
+  text-align: center;
 }
 
 .home-page button:hover {

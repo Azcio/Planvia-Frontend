@@ -15,7 +15,7 @@ createApp({
     })
 
     // Track which page is currently active: 'login', 'home', 'timetable', 'edit'
-    const page = ref('start')
+    const page = ref('home')
 
     // JWT token
     const token = ref('')
@@ -201,35 +201,45 @@ createApp({
     })
 
     // For adding/editing activities
-    const newActivity = ref('')
+    const newActivity = ref({
+      time: '',
+      activity: '',
+      repeat: 'once',
+      days: [],
+    })
     const newTime = ref('')
     const editingIndex = ref(null)
 
     // Add or update an activity
     const saveActivity = async () => {
-      if (!newActivity.value || !newTime.value) {
+      if (!newActivity.value.time || !newActivity.value.activity) {
         alert('Please enter both time and activity')
         return
       }
 
       if (editingIndex.value !== null) {
         // Update existing activity
-        schedule.value[editingIndex.value] = {
-          time: newTime.value,
-          activity: newActivity.value,
-        }
+        schedule.value[editingIndex.value] = { ...newActivity.value }
         editingIndex.value = null
       } else {
         // Add new activity
-        schedule.value.push({
-          time: newTime.value,
-          activity: newActivity.value,
-        })
+        schedule.value.push({ ...newActivity.value })
       }
 
-      // Clear inputs
-      newActivity.value = ''
-      newTime.value = ''
+      //Sort activities by time (e.g. 01:30 before 22:30)
+      schedule.value.sort((a, b) => {
+        const timeA = a.time.padStart(5, '0')
+        const timeB = b.time.padStart(5, '0')
+        return timeA.localeCompare(timeB)
+      })
+
+      // Reset form
+      newActivity.value = {
+        time: '',
+        activity: '',
+        repeat: 'once',
+        days: [],
+      }
 
       // Save to backend
       await saveSchedule()
@@ -237,10 +247,14 @@ createApp({
 
     // Edit existing activity
     const editActivity = (index) => {
-      const item = schedule.value[index]
-      newActivity.value = item.activity
-      newTime.value = item.time
       editingIndex.value = index
+      newActivity.value = { ...schedule.value[index] } // copy to avoid binding issues
+    }
+
+    // Cancel editing
+    const cancelEdit = () => {
+      editingIndex.value = null
+      newActivity.value = { time: '', activity: '', repeat: 'once', days: [] }
     }
 
     // Delete an activity
@@ -284,11 +298,11 @@ createApp({
       goToTimetable,
       fetchSchedule,
       newActivity,
-      newTime,
       editingIndex,
       saveActivity,
       editActivity,
       deleteActivity,
+      cancelEdit,
     }
   },
 }).mount('#app')

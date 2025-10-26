@@ -86,45 +86,95 @@
       <!-- Home Page -->
       <div class="home-page" v-if="page === 'home'">
         <h2>Welcome, {{ username }}!</h2>
-        <button @click="page='goToTimetable'">View Timetable</button>
-        <button @click="page='edit'">Edit Activities</button>
-        <button @click="logout">Logout</button>
-      </div>
 
-      <!-- Timetable Page -->
-      <div v-if="page === 'goToTimetable'" class="timetable-page">
-        <h2>Schedule for {{ formattedDate }}</h2>
-
-        <button @click="previousDay">Previous Day</button>
-        <button @click="nextDay">Next Day</button>
-
-        <div class="schedule">
-          <p v-if="schedule.length === 0">No activities scheduled for this day.</p>
-          <ul v-else>
-            <li v-for="item in schedule" :key="item.time">
-              <strong>{{ item.time }}</strong> — {{ item.activity }}
-              <button @click="editActivity(index)">✏️</button>
-              <button @click="deleteActivity(index)">🗑️</button>
-            </li>
-          </ul>
+        <div class="Page-Button" @click="page='goToTimetable'">
+          <img src="http://localhost:5000/images/icons/schedule.png" alt="schedule icon" />
+          <h3>View TimeTable</h3>
         </div>
 
-        <div class="add-activity">
-          <h3>{{ editingIndex !== null ? 'Edit Activity' : 'Add New Activity' }}</h3>
-          <input v-model="newTime" type="time" />
-          <input v-model="newActivity" placeholder="Activity name" />
-          <button @click="saveActivity">{{ editingIndex !== null ? 'Update' : 'Add' }}</button>
+        <div class="Page-Button" @click="page='goToTimetable'">
+          <img src="http://localhost:5000/images/icons/schedule.png" alt="schedule icon" />
+                    <h3>View TimeTable</h3>
+
         </div>
 
-        <button @click="page='home'">Back to Home</button>
+        <div class="Page-Button" @click="page='goToTimetable'">
+          <img src="http://localhost:5000/images/icons/schedule.png" alt="schedule icon" />
+                    <h3>View TimeTable</h3>
+
+        </div>
+
+        <div class="Page-Button" @click="page='goToTimetable'">
+          <img src="http://localhost:5000/images/icons/schedule.png" alt="schedule icon" />
+                    <h3>View TimeTable</h3>
+
+        </div>
+
+        <div class="Page-Button" @click="page='goToTimetable'">
+          <img src="http://localhost:5000/images/icons/schedule.png" alt="schedule icon" />
+                    <h3>View TimeTable</h3>
+
+        </div>
+
+        <div class="Page-Button" @click="page='goToTimetable'">
+          <img src="http://localhost:5000/images/icons/schedule.png" alt="schedule icon" />
+                    <h3>View TimeTable</h3>
+
+        </div>
+        
+        <!-- <button @click="logout">Logout</button> -->
       </div>
 
-      <!-- Edit Activities Page -->
-      <div class="edit-activities" v-if="page === 'edit'">
-        <h2>Edit Activities</h2>
-        <button @click="page='home'">Back to Home</button>
-      </div>
+<!-- Timetable Page -->
+<div v-if="page === 'goToTimetable'" class="timetable-page">
+  <h2>Schedule for {{ formattedDate }}</h2>
+
+  <button @click="previousDay">Previous Day</button>
+  <button @click="nextDay">Next Day</button>
+
+  <div class="schedule">
+    <p v-if="schedule.length === 0">No activities scheduled for this day.</p>
+    <ul v-else>
+      <li v-for="(item, index) in schedule" :key="index">
+        <strong>{{ item.time }}</strong> — {{ item.activity }}
+        <button @click="editActivity(index)">✏️</button>
+        <button @click="deleteActivity(index)">🗑️</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="add-activity">
+    <h3>{{ editingIndex !== null ? 'Edit Activity' : 'Add New Activity' }}</h3>
+    <input v-model="newActivity.time" type="time" />
+    <input v-model="newActivity.activity" placeholder="Activity name" />
+
+    <label>Repeat:</label>
+    <select v-model="newActivity.repeat">
+      <option value="once">Just today</option>
+      <option value="daily">Every day</option>
+      <option value="weekly">Same weekday</option>
+      <option value="custom">Custom days…</option>
+    </select>
+
+    <div v-if="newActivity.repeat === 'custom'">
+      <label
+        v-for="day in ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']"
+        :key="day"
+      >
+        <input type="checkbox" :value="day" v-model="newActivity.days" /> {{ day }}
+      </label>
     </div>
+
+    <button @click="saveActivity">
+      {{ editingIndex !== null ? 'Update' : 'Add' }}
+    </button>
+
+    <button v-if="editingIndex !== null" @click="cancelEdit">Cancel</button>
+  </div>
+
+  <button @click="page='home'">Back to Home</button>
+</div>
+
 
     <script src="public/js/scriptsheet.js"></script>
   </body>
